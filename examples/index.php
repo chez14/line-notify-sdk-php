@@ -9,8 +9,8 @@ require_once("../vendor/autoload.php");
  */
 
 $lineApi = new LINE\Notify\Api([
-    "client_id" => "",
-    "client_secret" => ""
+    "client_id" => '0123456789',
+    "client_secret" => '00112233445566778899aabbccddeeff'
 ]);
 
 $OAuthUrl = LINE\Notify\Token::generateAuthUrl($lineApi, "http://localhost:8087/oauthcallback.php", "stateA");

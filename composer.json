@@ -1,5 +1,5 @@
 {
-    "name": "chez14/line-notify",
+    "name": "chez14/line-notify-sdk",
     "type": "library",
     "description": "LINE Notify PHP SDK",
     "license": "MIT",
