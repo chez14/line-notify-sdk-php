@@ -9,7 +9,14 @@ class Api {
         $client_secret,
         $client_id,
         $token,
-        $guzzle;
+        $guzzle,
+        $ratelimit = [
+            "Limit"=> null,
+            "Remaining"=> null,
+            "ImageLimit"=> null,
+            "ImageRemaining"=> null,
+            "Reset"=> null
+        ];
 
     /**
      * Create a new Instance of this API client.
@@ -72,6 +79,18 @@ class Api {
         $this->token = $token;
     }
 
+    public function getRateLimit() {
+        return $this->ratelimit;
+    }
+
+    protected function updateLimitStatus($header) {
+        $this->ratelimit["Limit"] = $header['X-RateLimit-Limit'];
+        $this->ratelimit["Remaining"] = $header['X-RateLimit-Remaining'];
+        $this->ratelimit["ImageLimit"] = $header['X-RateLimit-ImageLimit'];
+        $this->ratelimit["ImageRemaining"] = $header['X-RateLimit-ImageRemaining'];
+        $this->ratelimit["Reset"] = $header['X-RateLimit-Reset'];
+    }
+
     protected function generate_request_options($type, $param, $options, $auth_type)
     {
         $type = \strtolower($type);
@@ -112,7 +131,10 @@ class Api {
     public function get($url, $param = [], $options = [], $auth_type = "client")
     {
         $request_param = $this->generate_request_options('get', $param, $options, $auth_type);
-        return $this->guzzle->request('GET', $url, $request_param);
+        $response = $this->guzzle->request('GET', $url, $request_param);
+
+        $this->updateLimitStatus($response->getHeaders());
+        return $response;
     }
 
     /**
@@ -121,6 +143,9 @@ class Api {
     public function post($url, $param = [], $options = [], $auth_type = "client")
     {
         $request_param = $this->generate_request_options('post', $param, $options, $auth_type);
-        return $this->guzzle->request('POST', $url, $request_param);
+        $response = $this->guzzle->request('POST', $url, $request_param);
+
+        $this->updateLimitStatus($response->getHeaders());
+        return $response;
     }
 }
