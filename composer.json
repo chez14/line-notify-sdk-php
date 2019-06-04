@@ -1,0 +1,16 @@
+{
+    "name": "chez14/line-notify",
+    "type": "library",
+    "description": "LINE Notify PHP SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris",
+            "email": "chris@christianto.net"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
