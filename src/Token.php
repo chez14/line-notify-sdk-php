@@ -1,7 +1,7 @@
 <?php
 namespace LINE\Notify;
 
-use function GuzzleHttp\json_decode;
+use LINE\Notify\Api;
 
 class Token {
     protected
