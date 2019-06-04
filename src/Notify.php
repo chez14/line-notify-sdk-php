@@ -36,7 +36,7 @@ class Notify {
                 rewind($image);
                 $request['imageFile'] = stream_get_contents($image);
             }
-        } else if (!$image) {
+        } else if ($image) {
             throw new \InvalidArgumentException("Unknown \$image var type or it's unsupported.");
         }
 

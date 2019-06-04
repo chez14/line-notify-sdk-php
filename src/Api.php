@@ -4,7 +4,8 @@ use LINE\Notify\Token;
 
 class Api {
     public
-        $api_url = "https://notify-bot.line.me/";
+        $api_url = "https://notify-api.line.me/",
+        $auth_url = "https://notify-bot.line.me/";
     protected
         $client_secret,
         $client_id,
@@ -96,7 +97,8 @@ class Api {
         $type = \strtolower($type);
         $supply_to = [
             "post" => 'form_params',
-            "get" => 'query'
+            "get" => 'query',
+            'multipart' => 'multipart'
         ];
         if (!array_key_exists($type, $supply_to)) {
             throw new \InvalidArgumentException("Not supported type. Got " . $type);

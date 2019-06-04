@@ -26,7 +26,7 @@ class Token {
             $query['response_mode'] = $response_mode;
         }
 
-        return $api::$api_url . "oauth/authorize?" . http_build_query($query);
+        return $api->auth_url . "oauth/authorize?" . http_build_query($query);
     }
 
     public static function fromString(Api $api, string $token):self {
@@ -35,7 +35,7 @@ class Token {
     }
 
     public static function fromAuthCode(Api $api, string $authCode, string $redirect_uri) {
-        $response = $api->post("oauth/token", [
+        $response = $api->post($api->auth_url . "oauth/token", [
             "grant_type" => "authorization_code",
             "code" => $authCode,
             "redirect_uri" => $redirect_uri
