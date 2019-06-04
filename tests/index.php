@@ -15,7 +15,6 @@ $lineApi = new LINE\Notify\Api([
 
 $OAuthUrl = LINE\Notify\Token::generateAuthUrl($lineApi, "http://localhost:8087/oauthcallback.php", "stateA");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +24,6 @@ $OAuthUrl = LINE\Notify\Token::generateAuthUrl($lineApi, "http://localhost:8087/
     <title>LINE Login</title>
 </head>
 <body>
-    To continue, please <a href="<?=$OAuthURL?>">Authenticate LINE Notify Bot</a>.
+    To continue, please <a href="<?=$OAuthUrl?>">Authenticate LINE Notify Bot</a>.
 </body>
 </html>
